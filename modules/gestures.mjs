@@ -7,7 +7,7 @@ document.addEventListener('touchstart', function (event) {
   event.preventDefault();
 }, { passive: false });
 
-let circle_touch = null
+let circle_touches = {}
 
 export function setup_gestures(canvas, circle) {
   canvas.addEventListener("touchstart", on_touch_start(canvas.getContext("2d")));
@@ -53,7 +53,11 @@ function on_touch_end() {
 function on_touch_start(ctx) {
   return (event) => {
     console.log("touch start", event)
-    // if inside the circle:
+    event.changedTouches.forEach(){
+      
+    }
+
+
     const changedTouch = event.changedTouches[0]
     const x = changedTouch.clientX
     const y = changedTouch.clientY
