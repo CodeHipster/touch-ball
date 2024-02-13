@@ -5,6 +5,12 @@ import { add_circle } from "./modules/circle_manager.mjs";
 
 console.log("test")
 
+// Disable back button
+history.pushState(null, null, document.URL);
+window.addEventListener('popstate', function () {
+    history.pushState(null, null, document.URL);
+});
+
 const canvas = setup_canvas();
 
 const circle = new_circle(

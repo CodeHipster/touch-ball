@@ -1,6 +1,6 @@
 import { random_color } from "./colors.mjs";
 import { inside_circle, draw_circle } from "./circle.mjs";
-import { get_circle, get_circle_id, move_circle } from "./circle_manager.mjs";
+import { get_circle, get_circle_by_coord, move_circle } from "./circle_manager.mjs";
 
 // disable default gestures for touch screens
 document.addEventListener('touchstart', function (event) {
@@ -22,15 +22,13 @@ function on_touch_move(ctx) {
     const touches = event.changedTouches
     for (let i = 0; i < touches.length; i++) {
       const touch = event.changedTouches.item(i)
-      console.log("circle_touch & touch", circle_touch, touch)
-      if (circle_touch && touch.identifier == circle_touch.touch_id) {
-        const x = touch.clientX - circle_touch.x
-        const y = touch.clientY - circle_touch.y
-        circle_touch.x = touch.clientX
-        circle_touch.y = touch.clientY
-        move_circle(circle_touch.circle_id, x, y)
-
-        const circle = get_circle(circle_touch.circle_id)
+      console.log("circle_touch & touch", circle_touches, touch)
+      const circle_touch = circle_touches[touch.identifier]
+      if (circle_touch) {
+        const x = touch.clientX + circle_touch.offset.x
+        const y = touch.clientY + circle_touch.offset.y
+        move_circle(circle_touch.circle, x, y)
+        const circle = get_circle(circle_touch.circle)
         draw_circle(circle, ctx)
       }
     }
@@ -43,35 +41,35 @@ function on_touch_end() {
     const touches = event.changedTouches
     for (let i = 0; i < touches.length; i++) {
       const touch = event.changedTouches.item(i)
-      if (touch.identifier == circle_touch) {
-        circle_touch = null
-      }
+      circle_touches[touch.identifier] = null
     }
   }
 }
 
+// connect circles with touches.
 function on_touch_start(ctx) {
   return (event) => {
     console.log("touch start", event)
-    event.changedTouches.forEach(){
-      
-    }
+    const touches = event.changedTouches
+    for (let i = 0; i < touches.length; i++) {
+      const touch = event.changedTouches.item(i)
+      const x = touch.clientX
+      const y = touch.clientY
+      const circle = get_circle_by_coord(x, y)
+      console.log("circle_id", circle.id)
+      if (circle != null) {
+        const touch_id = touch.identifier
+        if (circle_touches[touch_id]) {
+          console.log("touch already connected to a circle, but overriding it.")
+        }
+        const x_offset = circle.x - x;
+        const y_offset = circle.y - y;
+        circle_touches[touch_id] = { offset: { x: x_offset, y: y_offset }, circle: circle.id }
+        console.log("setting circle touch", circle_touches[touch_id])
 
-
-    const changedTouch = event.changedTouches[0]
-    const x = changedTouch.clientX
-    const y = changedTouch.clientY
-    const touch_id = changedTouch.identifier
-    const circle_id = get_circle_id(x, y)
-    console.log("circle_id", circle_id)
-    if (circle_id != null) {
-      if (circle_touch == null) {
-        circle_touch = { touch_id: touch_id, x: x, y: y, circle_id: circle_id }
-        console.log("setting circle touch", circle_touch)
+        ctx.fillStyle = random_color();
+        draw_circle(circle, ctx)
       }
-      const circle = get_circle(circle_id)
-      ctx.fillStyle = random_color();
-      draw_circle(circle, ctx)
     }
   }
 }

@@ -2,36 +2,38 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <!-- makes the page full screen when it is added as an app to android home. -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <script type="module" src="touch-ball.js" defer></script>
+  <script type="module" src="touch-ball.js" defer></script>
 
-    <style>
-        html {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
+  <style>
+    html {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
 
-        body {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
 
-        canvas {
-            background: #eeeeee;
-            margin: 0;
-            padding: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-        }
-    </style>
+    canvas {
+      background: #eeeeee;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  </style>
 
 </head>
 
 <body>
-    <canvas id="canvas"></canvas>
+  <canvas id="canvas"></canvas>
 </body>
 
 </html>
