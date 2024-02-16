@@ -1,7 +1,8 @@
-import { new_circle, draw_circle } from "./modules/circle.mjs";
 import { setup_canvas } from "./modules/canvas.mjs";
+import { new_circle } from "./modules/circle.mjs";
 import { setup_gestures } from "./modules/gestures.mjs";
 import { add_circle } from "./modules/circle_manager.mjs";
+import { paint_circle } from "./modules/painter.mjs";
 
 console.log("test")
 
@@ -23,5 +24,5 @@ setup_gestures(canvas)
 
 const ctx = canvas.getContext("2d");
 ctx.fillStyle = "white";
-draw_circle(circle, ctx)
+paint_circle(circle, ctx)
 

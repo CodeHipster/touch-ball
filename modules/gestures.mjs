@@ -1,6 +1,6 @@
 import { random_color } from "./colors.mjs";
-import { inside_circle, draw_circle } from "./circle.mjs";
-import { get_circle, get_circle_by_coord, move_circle } from "./circle_manager.mjs";
+import { paint_circle } from "./painter.mjs";
+import { clamp_circle, get_circle, get_circle_by_coord, move_circle } from "./circle_manager.mjs";
 
 // disable default gestures for touch screens
 document.addEventListener('touchstart', function (event) {
@@ -29,7 +29,8 @@ function on_touch_move(ctx) {
         const y = touch.clientY + circle_touch.offset.y
         move_circle(circle_touch.circle, x, y)
         const circle = get_circle(circle_touch.circle)
-        draw_circle(circle, ctx)
+        clamp_circle(circle, ctx.canvas.width, ctx.canvas.height)
+        paint_circle(circle, ctx)
       }
     }
   }
@@ -56,8 +57,8 @@ function on_touch_start(ctx) {
       const x = touch.clientX
       const y = touch.clientY
       const circle = get_circle_by_coord(x, y)
-      console.log("circle_id", circle.id)
       if (circle != null) {
+        console.log("circle_id", circle.id)
         const touch_id = touch.identifier
         if (circle_touches[touch_id]) {
           console.log("touch already connected to a circle, but overriding it.")
@@ -68,7 +69,7 @@ function on_touch_start(ctx) {
         console.log("setting circle touch", circle_touches[touch_id])
 
         ctx.fillStyle = random_color();
-        draw_circle(circle, ctx)
+        paint_circle(circle, ctx)
       }
     }
   }
