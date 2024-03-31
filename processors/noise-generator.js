@@ -34,7 +34,7 @@ class NoiseGenerator extends AudioWorkletProcessor {
   }
 
   process(inputs, outputs, parameters) {
-      console.log("ping");
+      // console.log("ping");
     const output = outputs[0];
     const amplitude = parameters.amplitude;
     const isAmplitudeConstant = amplitude.length === 1;

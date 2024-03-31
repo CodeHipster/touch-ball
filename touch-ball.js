@@ -6,13 +6,26 @@ import { paint_circle } from "./modules/painter.mjs";
 
 console.log("test")
 
+console.log(document.fullscreenEnabled)
+
+
+
 // Disable back button
 history.pushState(null, null, document.URL);
 window.addEventListener('popstate', function () {
-    history.pushState(null, null, document.URL);
+  history.pushState(null, null, document.URL);
 });
 
 const canvas = setup_canvas();
+
+// TODO: add start arrow, to register user interaction and enable sound and fullscreen :)
+canvas.ontouchstart = function () {
+  console.log("touch canvas")
+  setTimeout(() => {
+    canvas.requestFullscreen()
+    screen.orientation.lock("landscape")
+  }, 200)
+}
 
 const circle = new_circle(
   canvas.width / 2, canvas.height / 2,
