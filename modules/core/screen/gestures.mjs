@@ -12,3 +12,9 @@ export class GestureController{
     console.log("touch move: ", pos, id)
   }
 }
+
+const gestureController = new GestureController();
+
+export function getController(){
+  return gestureController;
+}

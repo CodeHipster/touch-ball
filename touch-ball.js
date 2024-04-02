@@ -4,28 +4,17 @@ import { setup_gestures } from "./modules/gestures.mjs";
 import { add_circle } from "./modules/circle_manager.mjs";
 import { paint_circle } from "./modules/painter.mjs";
 
-console.log("test")
 
-console.log(document.fullscreenEnabled)
+import { getController } from "./modules/core/screen/gestures.mjs";
+import { getCanvas } from "./modules/browser/canvas.mjs";
+import { setup } from "./modules/browser/setup.mjs";
 
+const gestureController = getController()
+const canvas2 = getCanvas()
 
-
-// Disable back button
-history.pushState(null, null, document.URL);
-window.addEventListener('popstate', function () {
-  history.pushState(null, null, document.URL);
-});
+setup(canvas2, gestureController)
 
 const canvas = setup_canvas();
-
-// TODO: add start arrow, to register user interaction and enable sound and fullscreen :)
-canvas.ontouchstart = function () {
-  console.log("touch canvas")
-  setTimeout(() => {
-    canvas.requestFullscreen()
-    screen.orientation.lock("landscape")
-  }, 200)
-}
 
 const circle = new_circle(
   canvas.width / 2, canvas.height / 2,
