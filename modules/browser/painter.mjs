@@ -1,18 +1,19 @@
 export class Painter {
-  canvas
+  context
   // canvas == 2d context of html canvas
-  constructor(canvas) {
-    this.canvas = canvas
+  constructor(context) {
+    this.context = context
   }
 
   wipe(){
-    this.canvas.clearRect(0, 0, canvas.width, canvas.height);
+    this.context.clearRect(0, 0, canvas.width, canvas.height);
   }
 
   paint(ball){
-    this.canvas.beginPath();
-    this.canvas.arc(ball.pos.x, ball.pos.y, ball.radius, 0, 2 * Math.PI);
-    this.canvas.fill();
-    this.canvas.stroke();
+    this.context.fillStyle = ball.color;
+    this.context.beginPath();
+    this.context.arc(ball.pos.x, ball.pos.y, ball.radius, 0, 2 * Math.PI);
+    this.context.fill();
+    this.context.stroke();
   }
 }
