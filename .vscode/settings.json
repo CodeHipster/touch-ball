@@ -3,8 +3,8 @@
   "editor.detectIndentation": false,
   "liveServer.settings.https": {
     "enable": true, //set it true to enable the feature.  
-    "cert": "/Users/thijsoostdam/projects/thijs/touch-ball/.vscode/liveserver.crt", //full path of the certificate  
-    "key": "/Users/thijsoostdam/projects/thijs/touch-ball/.vscode/liveserver.key", //full path of the private key  
+    "cert": "E:/development/touch-ball/.vscode/liveserver.crt", //full path of the certificate  
+    "key": "E:/development/touch-ball/.vscode/liveserver.key", //full path of the private key  
     "passphrase": "12345"
   }
 }

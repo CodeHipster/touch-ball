@@ -1,3 +1,5 @@
+<!-- Maybe nice idea for the future, lets keep it simple for now. -->
+
 # the entity component system design pattern
 
 This is usefull to separate concerns compared to OOP, where an object could have many different behaviours.
