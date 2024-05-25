@@ -1,23 +1,24 @@
-export class Canvaz {
+export class Canvas {
 
   constructor(elementName, store) {
-    this.context = document.getElementById(elementName).getContext("2d")
+    this.htmlCanvas = document.getElementById(elementName)
+    this.twoDContext = this.htmlCanvas.getContext("2d")
     this.store = store
 
     window.addEventListener("resize", () => this.#resize())
+    window.addEventListener("load", () => this.#resize())
   }
 
   getCtx() {
-    return this.context
+    return this.twoDContext
   }
 
   // Set the canvas to fullscreen
   #resize() {
     const width = window.innerWidth
     const height = window.innerHeight
-    console.log("resizing")
-    this.context.width = width
-    this.context.height = height
+    this.htmlCanvas.width = width
+    this.htmlCanvas.height = height
 
     this.#clamp_balls(width, height)
   }
