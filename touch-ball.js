@@ -8,9 +8,13 @@ import { mapTouches } from "./modules/browser/touch.mjs";
 import { GestureController } from "./modules/core/screen/gestures.mjs";
 import { TouchBall } from "./modules/core/screen/touch-systems/touch-ball.mjs";
 import { DragBall } from "./modules/core/screen/touch-systems/drag-ball.mjs";
+import { Windowz } from "./modules/browser/window.mjs";
 
 const store = new Store()
-const canvaz = new Canvas("canvas", store);
+const htmlCanvas = document.getElementById("canvas")
+const window = new Windowz(htmlCanvas)
+window.setup()
+const canvaz = new Canvas(htmlCanvas, store)
 const painter = new Painter(canvaz.getCtx())
 
 const gestures = new GestureController()

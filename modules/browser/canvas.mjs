@@ -1,7 +1,7 @@
 export class Canvas {
 
-  constructor(elementName, store) {
-    this.htmlCanvas = document.getElementById(elementName)
+  constructor(htmlCanvas, store) {
+    this.htmlCanvas = htmlCanvas
     this.twoDContext = this.htmlCanvas.getContext("2d")
     this.store = store
 

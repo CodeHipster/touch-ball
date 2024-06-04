@@ -8,7 +8,6 @@ export class DragBall{
   }
 
   touchStart(pos, id, time){
-    console.log("touch start")
     const ball = this.store.getBalls().find(pos)
     if (ball){
       this.drags[id] = {
@@ -19,14 +18,11 @@ export class DragBall{
     }
   }
 
-  // TODO: does touch end have different coordinates than last touchMove?
   touchEnd(pos, id, time){
-    console.log("touch end", pos, id, time)
     this.drags[id] = undefined
   }
 
   touchMove(pos, id, time){
-    console.log("touch move", pos, id, time)
     const drag = this.drags[id]
     if(!drag){
       console.log(`No ball to move for touch id: ${id}`)
@@ -37,5 +33,9 @@ export class DragBall{
     drag.pos = pos
     drag.time = time
     this.store.getBalls()[drag.ballId].move(translation)
+  }
+
+  moveStop(pos, id, time){
+    console.log("move stop")
   }
 }

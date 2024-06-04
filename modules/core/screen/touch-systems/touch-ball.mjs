@@ -3,7 +3,7 @@ export class TouchBall{
     this.store = store
   }
 
-  touchStart(pos, id){
+  touchStart(pos, id, time){
     const balls = this.store.getBalls()
     const ball = balls.find(pos)
     if (ball){
@@ -11,9 +11,12 @@ export class TouchBall{
     }
   }
 
-  touchEnd(pos, id){
+  touchEnd(pos, id, time){
   }
 
-  touchMove(pos, id){
+  touchMove(pos, id, time){
+  }
+
+  moveStop(pos, id, time){
   }
 }
