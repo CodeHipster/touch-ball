@@ -9,6 +9,7 @@ export class Store {
 
   addBall(ball){
     const id = this.balls.length
+    ball.id = id
     this.balls.push(ball)
     return id;
   }

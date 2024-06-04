@@ -10,4 +10,8 @@ export class Ball{
   randomizeColor(){
     this.color = random_color()
   }
+
+  move(pos){
+    this.pos.add(pos)
+  }
 }
