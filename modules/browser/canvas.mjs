@@ -13,6 +13,10 @@ export class Canvas {
     return this.twoDContext
   }
 
+  getHtmlCanvas(){
+    return this.htmlCanvas
+  }
+
   // Set the canvas to fullscreen
   #resize() {
     const width = window.innerWidth

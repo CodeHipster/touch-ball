@@ -1,8 +1,10 @@
+import { BallList } from "./ball-list.mjs";
+
 export class Store {
 
   balls
   constructor() {
-    this.balls = []
+    this.balls = new BallList()
   }
 
   addBall(ball){

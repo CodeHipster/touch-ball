@@ -2,12 +2,13 @@ import { Xy } from "../core/screen/location.mjs"
 
 export function mapTouches(canvas, gesturesController) {
   console.log("Mapping touches to gesturesController.")
-  canvas.addEventListener("touchstart", touchListener(gesturesController.touchStart))
-  canvas.addEventListener("touchend", touchListener(gesturesController.touchEnd))
-  canvas.addEventListener("touchmove", touchListener(gesturesController.touchMove))
+  const c = canvas.getHtmlCanvas();
+  c.addEventListener("touchstart", touchListener((pos, id)=>gesturesController.touchStart(pos,id)))
+  c.addEventListener("touchend", touchListener((pos, id)=>gesturesController.touchEnd(pos,id)))
+  c.addEventListener("touchmove", touchListener((pos, id)=>gesturesController.touchMove(pos,id)))
   // cancel happens when the touch is interupted by the system, as opposed to the user.
   // for our use case we can handle it the same as ending a touch.
-  canvas.addEventListener("touchcancel", touchListener(gesturesController.touchEnd))
+  c.addEventListener("touchcancel", touchListener((pos, id)=>gesturesController.touchEnd(pos,id)))
 }
 
 function touchListener(handler){

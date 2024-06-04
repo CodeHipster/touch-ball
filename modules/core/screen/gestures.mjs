@@ -1,7 +1,16 @@
 export class GestureController{
   
+  gestureHandlers = []
+
+  addHandler(handler){
+    this.gestureHandlers.push(handler)
+  }
+
   touchStart(pos, id){
     console.log("touch start: ", pos, id)
+    this.gestureHandlers.forEach(handler => {
+      handler.touchStart(pos,id)
+    })
   }
 
   touchEnd(pos, id){
@@ -11,10 +20,4 @@ export class GestureController{
   touchMove(pos, id){
     console.log("touch move: ", pos, id)
   }
-}
-
-const gestureController = new GestureController();
-
-export function getController(){
-  return gestureController;
 }
