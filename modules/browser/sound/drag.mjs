@@ -11,7 +11,7 @@ export class DragSound {
     this.#increaseAudioPool()
   }
 
-  #increaseAudioPool(amount = 1){
+  #increaseAudioPool(amount = 1) {
     for (let i = 0; i < amount; i++) {
       const audio = new AudioWorkletNode(this.audioContext, 'noise-generator')
       this.audios.push(audio)
@@ -21,7 +21,7 @@ export class DragSound {
   // velocity in 0-1
   play(velocity) {
     const audio = this.audios.pop()
-    if(!audio){
+    if (!audio) {
       this.#increaseAudioPool()
       audio = this.audios.pop();
     }
@@ -29,21 +29,16 @@ export class DragSound {
     const id = this.playing.length - 1
 
     let param = audio.parameters.get('velocity')
-    // TODO: allow 0 to make no sound
-    velocity = Math.max(0.01, Math.min(velocity, 1))
-    param.exponentialRampToValueAtTime(velocity, this.audioContext.currentTime);
-  
+    param.linearRampToValueAtTime(velocity, this.audioContext.currentTime)
     // audio is always playing, to stop it we disconnect it from the output
     // to start we connect it.
     audio.connect(this.audioContext.destination)
-    console.log(`dragging sound at velocity ${velocity}`)
-
     return id
   }
 
-  stop(id){
+  stop(id) {
     const audio = this.playing[id]
-    if(!audio){
+    if (!audio) {
       console.log("audio is not playing, already stopped?")
       return
     }
@@ -53,14 +48,13 @@ export class DragSound {
   }
 
   // velocity from 0-1
-  setVelocity(id, velocity){
+  setVelocity(id, velocity) {
     const audio = this.playing[id]
-    if(!audio){
+    if (!audio) {
       console.log("audio is not playing, can't set pitch")
       return
     }
     let param = audio.parameters.get('velocity')
-    velocity = Math.max(0.01, Math.min(velocity, 1));
-    param.exponentialRampToValueAtTime(velocity, this.audioContext.currentTime);
+    param.linearRampToValueAtTime(velocity, this.audioContext.currentTime)
   }
 }

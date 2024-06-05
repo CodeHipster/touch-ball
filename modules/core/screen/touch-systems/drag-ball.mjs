@@ -24,10 +24,8 @@ export class DragBall{
   touchEnd(pos, id, time){    
     const drag = this.drags[id]
     if(!drag){
-      console.log(`No ball to stop dragging: ${id}`)
       return
     }
-    console.log(`drags: ${this.drags}`, this.drags)
     this.dragSound.stop(this.drags[id].soundId)
     this.drags[id] = undefined
   }
@@ -35,26 +33,27 @@ export class DragBall{
   touchMove(pos, id, time){
     const drag = this.drags[id]
     if(!drag){
-      console.log(`No ball to move for touch id: ${id}`)
       return
     }
 
+    // move ball
     const translation = pos.subNew(drag.pos)
+    this.store.getBalls()[drag.ballId].move(translation)
+
+    // play sound
     const duration = time - drag.time
     let velocity = translation.length()/duration
-    console.log(`velocity: ${velocity}`)
-    // clamp velocity to 200
-    velocity = Math.max(0, Math.min(velocity, 200));
-    // then scale down to 0-1
-    velocity /= 200
+    // clamp velocity to 7, (max pixels/time one can reasonably reach)
+    velocity = Math.max(0, Math.min(velocity, 7));
+    // then scale down to 0-1, to match input for dragSound
+    velocity /= 7
     this.dragSound.setVelocity(drag.soundId, velocity)
     
+    // update previous values
     drag.pos = pos
     drag.time = time
-    this.store.getBalls()[drag.ballId].move(translation)
   }
 
   moveStop(pos, id, time){
-    console.log("move stop")
   }
 }

@@ -1,6 +1,3 @@
-### refactor
-  - audio drag
-
 ### new features
 - scenes, start & play
 - resolve todo's

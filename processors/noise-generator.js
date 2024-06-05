@@ -23,21 +23,16 @@ class NoiseGenerator extends AudioWorkletProcessor {
 
   constructor(){
       super();
-      console.log("log?");
   }
 
   static get parameterDescriptors() {
     return [
-      {name: 'amplitude', defaultValue: 0.5, minValue: 0, maxValue: 1},
       {name: 'velocity', defaultValue: 0, minValue: 0, maxValue: 1},
     ];
   }
 
   process(inputs, outputs, parameters) {
-      // console.log("ping");
     const output = outputs[0];
-    const amplitude = parameters.amplitude;
-    const isAmplitudeConstant = amplitude.length === 1;
     const velocity = parameters.velocity;
     const isVelocityConstant = velocity.length === 1;
 
@@ -51,14 +46,17 @@ class NoiseGenerator extends AudioWorkletProcessor {
         // To for example set the range from .9 to 1. example: (0.5 / 10) + 1-1/10 = 0.05 + 0.9 = 0.95
         let chanceToAmplify = 0;
         const v = (isVelocityConstant ? velocity[0] : velocity[i])
-        if(v != 0){
-          const s = v * 100 + 1
+        if(v > 0.01){ // too small v generates artifacts
+          const s = v * 100
           chanceToAmplify = (Math.random() / s) + (1-1/s);
+          const output = 2 * (Math.random() - 0.5)
+          * Math.pow(chanceToAmplify, 100) // power of 1000 creates numbers up to infinity
+          * ((v / 2) + 0.5);
+          // This loop can branch out based on AudioParam array length
+          outputChannel[i] = output // scale amplitude/volume with speed
+        }else{
+          outputChannel[i] = 0
         }
-        // This loop can branch out based on AudioParam array length
-        outputChannel[i] = 2 * (Math.random() - 0.5)
-         * Math.pow(chanceToAmplify,1000)
-          *  (isAmplitudeConstant ? amplitude[0] : amplitude[i]);
       }
     }
 
