@@ -13,12 +13,15 @@ import { Looper } from "./modules/core/looper.mjs";
 import { ClampBalls } from "./modules/core/screen/tick-systems/clamp-balls.mjs";
 import { AudioController } from "./modules/browser/sound/audio.mjs";
 import { TapSound } from "./modules/browser/sound/tap.mjs";
+import { DragSound } from "./modules/browser/sound/drag.mjs";
 
 const store = new Store()
 const audioController = new AudioController()
+await audioController.loadScripts(["processors/noise-generator.js"])
 const htmlCanvas = document.getElementById("canvas")
 const audioContext = audioController.getContext();
 const tapSound = new TapSound(audioContext)
+const dragSound = new DragSound(audioContext)
 const window = new Windowz(htmlCanvas, audioContext)
 window.setup()
 const canvaz = new Canvas(htmlCanvas, store)
@@ -26,7 +29,7 @@ const painter = new Painter(canvaz.getCtx())
 
 const gestures = new GestureController()
 gestures.addHandler(new TouchBall(store, tapSound))
-gestures.addHandler(new DragBall(store))
+gestures.addHandler(new DragBall(store, dragSound))
 mapTouches(htmlCanvas, gestures)
 
 const looper = new Looper();
