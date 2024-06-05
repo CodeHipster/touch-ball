@@ -14,4 +14,8 @@ export class Ball{
   move(pos){
     this.pos.add(pos)
   }
+
+  place(pos){
+    this.pos = pos
+  }
 }

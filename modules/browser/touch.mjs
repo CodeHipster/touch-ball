@@ -1,8 +1,8 @@
 import { Xy } from "../core/screen/location.mjs"
 
-export function mapTouches(canvas, gesturesController) {
+export function mapTouches(htmlCanvas, gesturesController) {
   console.log("Mapping touches to gesturesController.")
-  const c = canvas.getHtmlCanvas();
+  const c = htmlCanvas
   c.addEventListener("touchstart", touchListener((pos, id, time) => gesturesController.touchStart(pos, id, time)))
   c.addEventListener("touchend", touchListener((pos, id, time) => gesturesController.touchEnd(pos, id, time)))
   c.addEventListener("touchmove", touchListener((pos, id, time) => gesturesController.touchMove(pos, id, time)))

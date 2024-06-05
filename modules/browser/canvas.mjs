@@ -1,9 +1,12 @@
+import { Xy } from "../core/screen/location.mjs"
+
 export class Canvas {
 
   constructor(htmlCanvas, store) {
     this.htmlCanvas = htmlCanvas
-    this.twoDContext = this.htmlCanvas.getContext("2d")
+    this.twoDContext = htmlCanvas.getContext("2d")
     this.store = store
+    this.bounds = new Xy(htmlCanvas.width, htmlCanvas.height)
 
     window.addEventListener("resize", () => this.#resize())
     window.addEventListener("load", () => this.#resize())
@@ -17,6 +20,10 @@ export class Canvas {
     return this.htmlCanvas
   }
 
+  getBounds(){
+    return this.bounds
+  }
+
   // Set the canvas to fullscreen
   #resize() {
     const width = window.innerWidth
@@ -24,17 +31,8 @@ export class Canvas {
     this.htmlCanvas.width = width
     this.htmlCanvas.height = height
 
-    this.#clamp_balls(width, height)
+    this.bounds.x = this.htmlCanvas.width
+    this.bounds.y = this.htmlCanvas.height
   }
 
-  #clamp_balls(width, height) {
-    this.store.getBalls().forEach(circle => {
-      this.#clamp_ball(circle, width, height)
-    })
-  }
-
-  #clamp_ball(ball, width, height) {
-    ball.pos.x = Math.max(0, Math.min(ball.pos.x, width));
-    ball.pos.y = Math.max(0, Math.min(ball.pos.y, height));
-  }
 }
