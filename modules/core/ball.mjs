@@ -1,4 +1,4 @@
-import { random_color } from "../colors.mjs";
+import { random_color } from "./colors.mjs";
 
 export class Ball{
   constructor(pos, radius){
