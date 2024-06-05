@@ -1,6 +1,7 @@
 export class TouchBall{
-  constructor(store){
+  constructor(store, tapSound){
     this.store = store
+    this.tapSound = tapSound
   }
 
   touchStart(pos, id, time){
@@ -8,6 +9,7 @@ export class TouchBall{
     const ball = balls.find(pos)
     if (ball){
       ball.randomizeColor()
+      this.tapSound.play()
     }
   }
 

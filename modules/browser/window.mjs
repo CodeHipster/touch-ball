@@ -1,7 +1,8 @@
 // Abstraction for the browser window object.
 export class Windowz {
-  constructor(htmlCanvas) {
+  constructor(htmlCanvas, audioContext) {
     this.htmlCanvas = htmlCanvas
+    this.audioContext = audioContext
   }
 
   setup() {
@@ -17,8 +18,19 @@ export class Windowz {
       document.removeEventListener("touchend", onFirstTouch)
       // TODO: enable audio
       this.#fullScreen(this.htmlCanvas)
+      this.#setupAudioApi()
     }
     document.addEventListener("touchend", onFirstTouch)
+  }
+
+  // TODO: is this required when we have a start scene?
+  #setupAudioApi(){
+    if (this.audioContext.state === "suspended") {
+      this.audioContext.resume();
+      console.log("resuming audio context")
+    }else{
+      console.log("audio was not suspended?")
+    }
   }
 
   #fullScreen(canvas) {
