@@ -17,7 +17,7 @@ import { DragSound } from "./modules/browser/sound/drag.mjs";
 
 const store = new Store()
 const audioController = new AudioController()
-await audioController.loadScripts(["processors/noise-generator.js"])
+await audioController.loadScripts(["audio/noise-generator.js"])
 const htmlCanvas = document.getElementById("canvas")
 const audioContext = audioController.getContext();
 const tapSound = new TapSound(audioContext)
