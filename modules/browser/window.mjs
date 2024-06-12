@@ -16,7 +16,6 @@ export class Windowz {
     const onFirstTouch = ()=>{
       console.log("Registered first touch")
       document.removeEventListener("touchend", onFirstTouch)
-      // TODO: enable audio
       this.#fullScreen(this.htmlCanvas)
       this.#setupAudioApi()
     }
