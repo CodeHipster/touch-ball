@@ -3,6 +3,7 @@
 // TODO: disconnect from browser specifics, requestAnimationFrame
 export class Looper {
 
+  halt = true
   fps
   systems = []
 
@@ -16,10 +17,15 @@ export class Looper {
 
   // Starts looping and updating systems.
   start() {
-    console.log("Start looping")
+    console.log("Start ticking")
     this.fps.time = 0
     this.fps.frames = 0
+    this.halt = false
     this.#loop()
+  }
+
+  stop() {
+    this.halt = true
   }
 
   #loop(timeStamp) {
@@ -38,7 +44,7 @@ export class Looper {
 
     this.#updateSystems()
 
-    window.requestAnimationFrame((timeStamp) => this.#loop(timeStamp))
+    if(!this.halt) window.requestAnimationFrame((timeStamp) => this.#loop(timeStamp))
   }
 
   #updateSystems() {
