@@ -16,6 +16,7 @@ import { DragSound } from "../../browser/sound/drag.mjs";
 export class BallScene {
   constructor(audioContext, htmlCanvas) {
 
+    this.canvas = htmlCanvas
     this.store = new Store()
     this.looper = new Looper();
 
@@ -37,9 +38,16 @@ export class BallScene {
 
   start() {
     console.log("Starting game.")
-    
-    // place ball and start rendering
-    this.store.addBall(new Ball(new Xy(80, 80), 40))
+
+    const width = this.canvas.width
+    const height = this.canvas.height
+
+    const x = width / 2
+    const y = height / 2
+
+    const radius = Math.min(width, height)/7
+
+    this.store.addBall(new Ball(new Xy(x, y), radius))
     this.looper.start();
   }
 
