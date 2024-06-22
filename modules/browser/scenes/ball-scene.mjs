@@ -12,6 +12,9 @@ import { Looper } from "../../core/looper.mjs";
 import { ClampBalls } from "../../core/screen/tick-systems/clamp-balls.mjs";
 import { TapSound } from "../../browser/sound/tap.mjs";
 import { DragSound } from "../../browser/sound/drag.mjs";
+import { Background } from "../background.mjs";
+import { PaintBackground } from "../../core/screen/tick-systems/paint-background.mjs";
+import { WipeCanvas } from "../../core/screen/tick-systems/wipe-canvas.mjs";
 
 export class BallScene {
   constructor(audioContext, htmlCanvas) {
@@ -24,12 +27,17 @@ export class BallScene {
     const dragSound = new DragSound(audioContext)
     const canvaz = new Canvas(htmlCanvas)
     const painter = new Painter(canvaz.getCtx())
+    const background = new Background(htmlCanvas)
 
     const gestures = new GestureController()
     gestures.addHandler(new TouchBall(this.store, tapSound))
-    gestures.addHandler(new DragBall(this.store, dragSound))
+    gestures.addHandler(new DragBall(this.store, dragSound, painter))
     mapTouches(htmlCanvas, gestures)
 
+    const wipe = new WipeCanvas(painter)
+    this.looper.addSystem(wipe)
+    const paintBackground = new PaintBackground(background, canvaz.getCtx())
+    this.looper.addSystem(paintBackground)
     const clamper = new ClampBalls(canvaz, this.store)
     this.looper.addSystem(clamper)
     const ballPainter = new PaintBalls(this.store, painter)
@@ -45,7 +53,7 @@ export class BallScene {
     const x = width / 2
     const y = height / 2
 
-    const radius = Math.min(width, height)/7
+    const radius = Math.min(width, height) / 7
 
     this.store.addBall(new Ball(new Xy(x, y), radius))
     this.looper.start();

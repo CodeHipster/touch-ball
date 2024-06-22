@@ -6,7 +6,7 @@ export class PaintBalls {
   }
 
   onTick() {
-    this.painter.wipe()
+    // console.log("paint balls")
     this.store.getBalls().forEach(ball => {
       this.painter.paint(ball)
     });

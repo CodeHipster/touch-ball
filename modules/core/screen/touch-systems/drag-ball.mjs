@@ -3,9 +3,10 @@ export class DragBall{
   // references of balls being dragged.
   drags = []
 
-  constructor(store, dragSound){
+  constructor(store, dragSound, painter){
     this.store = store
     this.dragSound = dragSound
+    this.painter = painter
   }
 
   touchStart(pos, id, time){
@@ -30,6 +31,7 @@ export class DragBall{
     this.drags[id] = undefined
   }
 
+  // The last location of touchMove equals the location of touchEnd. Though the event time might differ.
   touchMove(pos, id, time){
     const drag = this.drags[id]
     if(!drag){
@@ -38,7 +40,11 @@ export class DragBall{
 
     // move ball
     const translation = pos.subNew(drag.pos)
-    this.store.getBalls()[drag.ballId].move(translation)
+    const ball = this.store.getBalls()[drag.ballId]
+    ball.move(translation)
+
+    // spray color on canvas
+    this.painter.spray(ball)
 
     // play sound
     const duration = time - drag.time
@@ -49,10 +55,13 @@ export class DragBall{
     velocity /= 7
     this.dragSound.setVelocity(drag.soundId, velocity)
     
+
     // update previous values
     drag.pos = pos
     drag.time = time
   }
+
+
 
   moveStop(pos, id, time){
   }
