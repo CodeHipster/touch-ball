@@ -1,9 +1,10 @@
 export class Painter {
   context
+  backgroundContext
   // canvas == 2d context of html canvas
-  constructor(context, background) {
+  constructor(context, backgroundContext) {
     this.context = context
-    this.background = background
+    this.backgroundContext = backgroundContext
   }
 
   wipe(){
@@ -20,15 +21,30 @@ export class Painter {
 
   spray(ball){
     // If needed this can be optimized by manipulating the pixel buffer
-    const area = Math.PI * ball.radius * ball.radius
-    const sprayCount = area * .3
-
-    console.log(ball.radius)
+    const sprayCount = 5
 
     for (let i = 0; i < sprayCount; i++) {
-      const xOff = Math.sin(Math.random() * 2 * Math.PI) * ball.radius
-      const yOff = Math.sin(Math.random() * 2 * Math.PI) * ball.radius
-      this.background.setPixel(ball.pos.x + xOff, ball.pos.y + yOff, ball.color);
+      const randomPos = Math.random() * ball.radius
+      const randomAngle = Math.random() * 2 * Math.PI
+      const offset = this.#rotate(randomPos, randomAngle)
+      const x = ball.pos.x + offset[0]
+      const y = ball.pos.y + offset[1]
+      const radius = ball.radius / 10
+
+      console.log(this.backgroundContext)
+      
+      this.backgroundContext.fillStyle = `rgb(${ball.color[0]},${ball.color[1]},${ball.color[2]})`;
+      this.backgroundContext.beginPath();
+      this.backgroundContext.arc(x, y, radius, 0, 2 * Math.PI);
+      this.backgroundContext.fill();
     }
   }
+
+  #rotate(x, angle) {
+        const cos = Math.cos(angle)
+        const sin = Math.sin(angle)
+        const nx = (cos * x)
+        const ny = -(sin * x)
+    return [nx, ny];
+}
 }
