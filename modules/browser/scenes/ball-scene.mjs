@@ -26,8 +26,8 @@ export class BallScene {
     const tapSound = new TapSound(audioContext)
     const dragSound = new DragSound(audioContext)
     const canvaz = new Canvas(htmlCanvas)
-    const painter = new Painter(canvaz.getCtx())
     const background = new Background(htmlCanvas)
+    const painter = new Painter(canvaz.getCtx(), background)
 
     const gestures = new GestureController()
     gestures.addHandler(new TouchBall(this.store, tapSound))

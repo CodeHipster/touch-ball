@@ -8,11 +8,20 @@ export class Background {
     this.#resize()
   }
 
-  getImage(){
+  getImage() {
     return this.image
   }
 
-  #resize() {    
+  setPixel(x, y, color) {
+    const index = (this.image.width * Math.floor(y) + Math.floor(x)) * 4
+    this.image.data[index] = color[0]
+    this.image.data[index + 1] = color[1]
+    this.image.data[index + 2] = color[2]
+
+    console.log(this.image.data[index])
+  }
+
+  #resize() {
     const width = this.htmlCanvas.width
     const height = this.htmlCanvas.height
     this.image = this.context.createImageData(width, height);
