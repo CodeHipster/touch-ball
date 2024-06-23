@@ -1,12 +1,24 @@
 export class PaintBackground {
+  
+  bitmap = null
+  
   constructor(background, context) {
     this.background = background
     this.context = context
   }
 
   onTick() {
-    // console.log("background")
-    // This causes flickering, perhaps try an extra canvas? https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas
-    this.context.putImageData(this.background.image, 0, 0)
+    // context.putImageData has a bug in android where it creates artifacts when used with context.stroke()
+    // this.context.putImageData(this.background.getImage(), 0,0)
+    // Using an imageBitmap drawn a frame later as a work around.
+    const image = this.background.getImage()
+    createImageBitmap(image, 0, 0, image.width, image.height)
+    .then((bitmap)=>{
+      this.bitmap = bitmap
+    })
+
+    if(this.bitmap){
+      this.context.drawImage(this.bitmap, 0, 0);
+    }
   }
 }
