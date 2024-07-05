@@ -51,17 +51,15 @@ export class DragBall{
     let velocity = translation.length()/duration
     // clamp velocity to 7, (max pixels/time one can reasonably reach)
     velocity = Math.max(0, Math.min(velocity, 7));
+    ball.velocity = velocity
     // then scale down to 0-1, to match input for dragSound
     velocity /= 7
     this.dragSound.setVelocity(drag.soundId, velocity)
     
-
     // update previous values
     drag.pos = pos
     drag.time = time
   }
-
-
 
   moveStop(pos, id, time){
   }

@@ -8,12 +8,16 @@ export class TouchBall{
     const balls = this.store.getBalls()
     const ball = balls.find(pos)
     if (ball){
-      ball.randomizeColor()
       this.tapSound.play()
     }
   }
 
   touchEnd(pos, id, time){
+    const balls = this.store.getBalls()
+    const ball = balls.find(pos)
+    if (ball){
+      ball.randomizeColor()
+    }
   }
 
   touchMove(pos, id, time){
