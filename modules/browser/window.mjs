@@ -17,19 +17,8 @@ export class Windowz {
       console.log("Registered first touch")
       document.removeEventListener("touchend", onFirstTouch)
       this.#fullScreen(this.htmlCanvas)
-      this.#setupAudioApi()
     }
     document.addEventListener("touchend", onFirstTouch)
-  }
-
-  // TODO: is this required when we have a start scene?
-  #setupAudioApi(){
-    if (this.audioContext.state === "suspended") {
-      this.audioContext.resume();
-      console.log("resuming audio context")
-    }else{
-      console.log("audio was not suspended?")
-    }
   }
 
   #fullScreen(canvas) {
@@ -47,9 +36,9 @@ export class Windowz {
 
   // Disable back button
   #disableNavigation() {
-    history.pushState(null, null, document.URL)
-    window.addEventListener('popstate', function () {
-      history.pushState(null, null, document.URL)
-    });
+    history.pushState(null, null, location.href); 
+    history.back(); 
+    history.forward(); 
+    window.onpopstate = function () { history.go(1); };
   }
 }
