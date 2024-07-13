@@ -1,4 +1,4 @@
-import { Xy } from "../core/screen/location.mjs"
+import { Xy } from "../core/common/location.mjs"
 
 export class Canvas {
 

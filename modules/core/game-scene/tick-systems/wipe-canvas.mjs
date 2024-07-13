@@ -4,7 +4,6 @@ export class WipeCanvas{
   }
 
   onTick(){
-    // console.log("wipe")
     this.painter.wipe()
   }
 }

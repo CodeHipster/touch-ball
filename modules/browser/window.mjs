@@ -17,6 +17,7 @@ export class Windowz {
       console.log("Registered first touch")
       document.removeEventListener("touchend", onFirstTouch)
       this.#fullScreen(this.htmlCanvas)
+      this.#setupAudioApi()
     }
     document.addEventListener("touchend", onFirstTouch)
   }
@@ -25,6 +26,15 @@ export class Windowz {
     console.log("Going fullscreen")
     canvas.requestFullscreen()
     screen.orientation.lock("landscape")
+  }
+
+  #setupAudioApi(){
+    if (this.audioContext.state === "suspended") {
+      this.audioContext.resume();
+      console.log("resuming audio context")
+    }else{
+      console.log("audio was not suspended?")
+    }
   }
 
   // disable default gestures for touch screens

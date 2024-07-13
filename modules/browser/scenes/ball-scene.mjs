@@ -1,20 +1,20 @@
-import { PaintBalls } from "../../core/screen/tick-systems/paint-balls.mjs";
-import { Store } from "../../core/game/store.mjs";
+import { PaintBalls } from "../../core/game-scene/tick-systems/paint-balls.mjs";
+import { Store } from "../../core/game-scene/store.mjs";
 import { Painter } from "../../browser/painter.mjs";
-import { Ball } from "../../core/ball.mjs";
-import { Xy } from "../../core/screen/location.mjs";
+import { Ball } from "../../core/game-scene/ball.mjs";
+import { Xy } from "../../core/common/location.mjs";
 import { Canvas } from "../../browser/canvas.mjs";
 import { mapTouches } from "../../browser/touch.mjs";
-import { GestureController } from "../../core/screen/gestures.mjs";
-import { TouchBall } from "../../core/screen/touch-systems/touch-ball.mjs";
-import { DragBall } from "../../core/screen/touch-systems/drag-ball.mjs";
-import { Looper } from "../../core/looper.mjs";
-import { ClampBalls } from "../../core/screen/tick-systems/clamp-balls.mjs";
+import { GestureController } from "../../core/common/gestures.mjs";
+import { TouchBall } from "../../core/game-scene/touch-systems/touch-ball.mjs";
+import { DragBall } from "../../core/game-scene/touch-systems/drag-ball.mjs";
+import { Looper } from "../../core/common/looper.mjs";
+import { ClampBalls } from "../../core/game-scene/tick-systems/clamp-balls.mjs";
 import { TapSound } from "../../browser/sound/tap.mjs";
 import { DragSound } from "../../browser/sound/drag.mjs";
 import { Background } from "../background.mjs";
-import { PaintBackground } from "../../core/screen/tick-systems/paint-background.mjs";
-import { WipeCanvas } from "../../core/screen/tick-systems/wipe-canvas.mjs";
+import { PaintBackground } from "../../core/game-scene/tick-systems/paint-background.mjs";
+import { WipeCanvas } from "../../core/game-scene/tick-systems/wipe-canvas.mjs";
 import Scheduler from "../scheduler.mjs";
 
 export class BallScene {

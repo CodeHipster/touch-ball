@@ -1,4 +1,4 @@
-import { Looper } from "../../core/looper.mjs"
+import { Looper } from "../../core/common/looper.mjs"
 import { InitScenePaintSystem } from "../../core/start-scene/painter.mjs"
 import Scheduler from "../scheduler.mjs";
 
