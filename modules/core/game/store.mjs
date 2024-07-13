@@ -1,4 +1,4 @@
-import { BallList } from "./ball-list.mjs";
+import { BallList } from "../ball-list.mjs";
 
 export class Store {
 

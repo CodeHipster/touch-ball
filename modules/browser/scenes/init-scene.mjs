@@ -1,11 +1,14 @@
 import { Looper } from "../../core/looper.mjs"
 import { InitScenePaintSystem } from "../../core/start-scene/painter.mjs"
+import Scheduler from "../scheduler.mjs";
 
 export class InitScene {
 
   constructor(canvas, sceneManager) {
+    
+    const scheduler = new Scheduler()
     this.canvas = canvas
-    this.looper = new Looper()
+    this.looper = new Looper(scheduler)
     const painter = new InitScenePaintSystem(this.canvas)
     this.looper.addSystem(painter)
     this.sceneManager = sceneManager

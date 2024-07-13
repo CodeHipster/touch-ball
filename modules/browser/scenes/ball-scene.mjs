@@ -1,5 +1,5 @@
 import { PaintBalls } from "../../core/screen/tick-systems/paint-balls.mjs";
-import { Store } from "../../core/store.mjs";
+import { Store } from "../../core/game/store.mjs";
 import { Painter } from "../../browser/painter.mjs";
 import { Ball } from "../../core/ball.mjs";
 import { Xy } from "../../core/screen/location.mjs";
@@ -15,13 +15,15 @@ import { DragSound } from "../../browser/sound/drag.mjs";
 import { Background } from "../background.mjs";
 import { PaintBackground } from "../../core/screen/tick-systems/paint-background.mjs";
 import { WipeCanvas } from "../../core/screen/tick-systems/wipe-canvas.mjs";
+import Scheduler from "../scheduler.mjs";
 
 export class BallScene {
   constructor(audioContext, htmlCanvas) {
 
+    const scheduler = new Scheduler()
     this.canvas = htmlCanvas
     this.store = new Store()
-    this.looper = new Looper();
+    this.looper = new Looper(scheduler);
 
     const tapSound = new TapSound(audioContext)
     const dragSound = new DragSound(audioContext)
