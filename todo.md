@@ -17,6 +17,6 @@
 ### other
 - make it work on iphones
 - smoothen scratching sound
-- properly disable back button
+- remove dependencies on browser globals, like console
 - resolve todo's
 

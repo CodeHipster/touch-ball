@@ -1,13 +1,13 @@
-// One game loop based on requestAnimation frame
-// This pauses the game when the browser is inactive.
-// TODO: disconnect from browser specifics, requestAnimationFrame
+// Looper will continously call onTick on registered systems
+// It will also measure the fps of the system.
 export class Looper {
 
   halt = true
   fps
   systems = []
 
-  constructor() {
+  constructor(scheduler) {
+    this.scheduler = scheduler
     this.fps = { frames: 0, time: 0 }
   }
 
@@ -44,7 +44,8 @@ export class Looper {
 
     this.#updateSystems()
 
-    if(!this.halt) window.requestAnimationFrame((timeStamp) => this.#loop(timeStamp))
+    if(!this.halt) 
+      this.scheduler.schedule((timeStamp) => this.#loop(timeStamp))
   }
 
   #updateSystems() {
