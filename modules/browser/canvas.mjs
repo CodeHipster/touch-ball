@@ -2,6 +2,8 @@ import { Xy } from "../core/common/location.mjs"
 
 export class Canvas {
 
+  touches = []
+
   constructor(htmlCanvas) {
     console.info("Initialize Canvas")
     this.htmlCanvas = htmlCanvas
@@ -11,6 +13,18 @@ export class Canvas {
     window.addEventListener("resize", () => this.#resize())
     window.addEventListener("load", () => this.#resize())
     this.#resize()
+  }
+
+  registerTouch(fn) {
+    this.touches.push(fn)
+    this.htmlCanvas.addEventListener("touchend", fn)
+  }
+
+  clearTouches(){
+    this.touches.forEach(fn => {
+      this.htmlCanvas.removeEventListener("touchend", fn)
+    });
+    this.touches = []
   }
 
   getCtx() {

@@ -10,23 +10,20 @@ import { TouchBall } from "../../core/game-scene/touch-systems/touch-ball.mjs";
 import { DragBall } from "../../core/game-scene/touch-systems/drag-ball.mjs";
 import { Looper } from "../../core/common/looper.mjs";
 import { ClampBalls } from "../../core/game-scene/tick-systems/clamp-balls.mjs";
-import { TapSound } from "../../browser/sound/tap.mjs";
-import { DragSound } from "../../browser/sound/drag.mjs";
 import { Background } from "../background.mjs";
 import { PaintBackground } from "../../core/game-scene/tick-systems/paint-background.mjs";
 import { WipeCanvas } from "../../core/game-scene/tick-systems/wipe-canvas.mjs";
-import Scheduler from "../scheduler.mjs";
 
 export class BallScene {
-  constructor(audioContext, htmlCanvas) {
+  constructor(platform, htmlCanvas) {
 
-    const scheduler = new Scheduler()
+    const scheduler = platform.scheduler()
     this.canvas = htmlCanvas
     this.store = new Store()
     this.looper = new Looper(scheduler);
 
-    const tapSound = new TapSound(audioContext)
-    const dragSound = new DragSound(audioContext)
+    const tapSound = platform.tapSound()
+    const dragSound = platform.dragSound()
     const canvaz = new Canvas(htmlCanvas)
     const background = new Background(htmlCanvas)
     const painter = new Painter(canvaz.getCtx(), background.getCtx())
