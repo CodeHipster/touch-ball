@@ -60,6 +60,6 @@ export class BallScene {
   }
 
   stop() {
-    throw Error("TODO: implement")
+    throw Error("Not implemented yet.")
   }
 }

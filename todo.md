@@ -18,5 +18,4 @@
 - make it work on iphones
 - smoothen scratching sound
 - remove dependencies on browser globals, like console
-- resolve todo's
 
