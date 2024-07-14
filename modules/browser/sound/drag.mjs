@@ -20,7 +20,7 @@ export class DragSound {
 
   // velocity in 0-1
   play(velocity) {
-    const audio = this.audios.pop()
+    var audio = this.audios.pop()
     if (!audio) {
       this.#increaseAudioPool()
       audio = this.audios.pop();
