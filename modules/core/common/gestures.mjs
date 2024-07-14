@@ -27,7 +27,7 @@ export class GestureController {
       const msToStop = 100
       clearTimeout(this.touchStopTimers[id]);
       this.touchStopTimers[id] = setTimeout(() => {
-        handler.moveStop(pos, id, time+msToStop);
+        handler.moveStop(pos, id, time + msToStop);
       }, msToStop);
     })
   }

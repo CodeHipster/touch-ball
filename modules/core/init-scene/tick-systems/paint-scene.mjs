@@ -1,9 +1,9 @@
-export class InitScenePaintSystem{
+export class InitScenePaintSystem {
 
-  constructor(painter){
+  constructor(painter) {
     this.painter = painter
   }
-  onTick(){
+  onTick() {
     this.painter.triangle()
   }
 }

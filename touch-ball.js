@@ -11,9 +11,8 @@ const audioContext = audioController.getContext();
 const window = new Windowz(htmlCanvas, audioContext)
 window.setup()
 const background = new Background(htmlCanvas)
-
 const platform = new PlatformFactory(audioContext, htmlCanvas, background.getCanvas())
 
-new Starter(platform).start(htmlCanvas);
+new Starter(platform).start();
 
 

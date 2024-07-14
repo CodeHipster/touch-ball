@@ -20,22 +20,14 @@ export class Canvas {
     this.htmlCanvas.addEventListener("touchend", fn)
   }
 
-  clearTouches(){
+  clearTouches() {
     this.touches.forEach(fn => {
       this.htmlCanvas.removeEventListener("touchend", fn)
     });
     this.touches = []
   }
 
-  getCtx() {
-    return this.twoDContext
-  }
-
-  getHtmlCanvas(){
-    return this.htmlCanvas
-  }
-
-  getBounds(){
+  getBounds() {
     return this.bounds
   }
 
@@ -50,5 +42,4 @@ export class Canvas {
     this.bounds.x = this.htmlCanvas.width
     this.bounds.y = this.htmlCanvas.height
   }
-
 }

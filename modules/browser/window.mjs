@@ -12,8 +12,8 @@ export class Windowz {
   }
 
   // Some features, like audio streaming and fullscreen are only allowed after the user interacts with the page.
-  #setupPermissions(){
-    const onFirstTouch = ()=>{
+  #setupPermissions() {
+    const onFirstTouch = () => {
       console.log("Registered first touch")
       document.removeEventListener("touchend", onFirstTouch)
       this.#fullScreen(this.htmlCanvas)
@@ -28,17 +28,17 @@ export class Windowz {
     screen.orientation.lock("landscape")
   }
 
-  #setupAudioApi(){
+  #setupAudioApi() {
     if (this.audioContext.state === "suspended") {
       this.audioContext.resume();
       console.log("resuming audio context")
-    }else{
+    } else {
       console.log("audio was not suspended?")
     }
   }
 
   // disable default gestures for touch screens
-  #disableGestures(){
+  #disableGestures() {
     document.addEventListener('touchstart', function (event) {
       event.preventDefault();
     }, { passive: false });
@@ -46,9 +46,9 @@ export class Windowz {
 
   // Disable back button
   #disableNavigation() {
-    history.pushState(null, null, location.href); 
-    history.back(); 
-    history.forward(); 
+    history.pushState(null, null, location.href);
+    history.back();
+    history.forward();
     window.onpopstate = function () { history.go(1); };
   }
 }

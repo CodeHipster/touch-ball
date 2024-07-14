@@ -1,18 +1,18 @@
 
 import { SceneManager } from "./common/scenes.mjs";
 import { InitScene } from "./init-scene/init-scene.mjs";
-import { BallScene } from "../browser/scenes/ball-scene.mjs";
+import { BallScene } from "./game-scene/ball-scene.mjs";
 
 export default class Starter {
 
-  constructor(platform){
+  constructor(platform) {
     this.platform = platform
   }
 
-  start(htmlCanvas) {
+  start() {
     const sceneManager = new SceneManager()
     sceneManager.addScene("init", new InitScene(this.platform, sceneManager))
-    sceneManager.addScene("game", new BallScene(this.platform, htmlCanvas))
+    sceneManager.addScene("game", new BallScene(this.platform))
     sceneManager.start("init")
   }
 }

@@ -1,19 +1,11 @@
 export class Background {
 
-  shadowCanvas
-
   constructor(htmlCanvas) {
     this.htmlCanvas = htmlCanvas
     this.shadowCanvas = htmlCanvas.cloneNode()
 
-    console.log("boop")
     window.addEventListener("resize", () => this.#resize())
-
     this.#resize()
-  }
-
-  getCtx(){
-    return this.shadowCanvas.getContext("2d")
   }
 
   getCanvas() {
@@ -21,7 +13,6 @@ export class Background {
   }
 
   #resize() {
-    console.log("beep")
     const width = window.innerWidth
     const height = window.innerHeight
     this.shadowCanvas.width = width

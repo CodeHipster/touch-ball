@@ -7,14 +7,14 @@ export class Store {
     this.balls = new BallList()
   }
 
-  addBall(ball){
+  addBall(ball) {
     const id = this.balls.length
     ball.id = id
     this.balls.push(ball)
     return id;
   }
 
-  getBalls(){
+  getBalls() {
     return this.balls
   }
 

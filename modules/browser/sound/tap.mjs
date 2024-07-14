@@ -1,11 +1,11 @@
-export class TapSound{
+export class TapSound {
   // Holding a pool tap sound sources, so we can play multiple at the same time.
   // without wasting to many resources.
   audios = []
   // current index in array
   index = 0
 
-  constructor(audioContext){
+  constructor(audioContext) {
     this.audioContext = audioContext
 
     // creating pool
@@ -17,7 +17,7 @@ export class TapSound{
     }
   }
 
-  play(){
+  play() {
     this.audios[this.index++].play();
     if (this.index >= this.audios.length) {
       this.index = 0

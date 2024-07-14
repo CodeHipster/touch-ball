@@ -22,10 +22,8 @@ export class InitScene {
 
   stop() {
     this.canvas.clearTouches()
-    console.log(this.looper)
     this.looper.stop()
   }
-
 
   #onTouch() {
     // wait 200 ms for the first touch events to process
@@ -35,5 +33,4 @@ export class InitScene {
       this.sceneManager.start("game")
     }, 200)
   }
-
 }

@@ -44,7 +44,7 @@ export class Looper {
 
     this.#updateSystems()
 
-    if(!this.halt) 
+    if (!this.halt)
       this.scheduler.schedule((timeStamp) => this.#loop(timeStamp))
   }
 

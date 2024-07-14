@@ -1,17 +1,17 @@
-export class AudioController{
+export class AudioController {
 
-  constructor(){
+  constructor() {
     this.audioContext = new AudioContext()
   }
 
-  async loadScripts(scriptLocations){
+  async loadScripts(scriptLocations) {
     for (let index = 0; index < scriptLocations.length; index++) {
       const location = scriptLocations[index];
       await this.audioContext.audioWorklet.addModule(location);
     }
   }
 
-  getContext(){
+  getContext() {
     return this.audioContext
   }
 

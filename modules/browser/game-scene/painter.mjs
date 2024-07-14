@@ -17,7 +17,7 @@ export class Painter {
   // Spray on background
   spray(ball) {
     const sprayCount = 5 * ball.velocity
-    
+
     this.backgroundContext.fillStyle = `rgb(${ball.color[0]},${ball.color[1]},${ball.color[2]})`;
     for (let i = 0; i < sprayCount; i++) {
       const randomPos = (Math.random() * ball.radius) / 3 + ball.radius / 2
@@ -44,7 +44,7 @@ export class Painter {
   }
 
   // Paint the background on the canvas
-  background(){
+  background() {
     this.context.drawImage(this.backgroundCanvas, 0, 0);
   }
 

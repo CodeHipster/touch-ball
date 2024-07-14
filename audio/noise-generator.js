@@ -21,13 +21,13 @@
  */
 class NoiseGenerator extends AudioWorkletProcessor {
 
-  constructor(){
-      super();
+  constructor() {
+    super();
   }
 
   static get parameterDescriptors() {
     return [
-      {name: 'velocity', defaultValue: 0, minValue: 0, maxValue: 1},
+      { name: 'velocity', defaultValue: 0, minValue: 0, maxValue: 1 },
     ];
   }
 
@@ -46,15 +46,15 @@ class NoiseGenerator extends AudioWorkletProcessor {
         // To for example set the range from .9 to 1. example: (0.5 / 10) + 1-1/10 = 0.05 + 0.9 = 0.95
         let chanceToAmplify = 0;
         const v = (isVelocityConstant ? velocity[0] : velocity[i])
-        if(v > 0.01){ // too small v generates artifacts
+        if (v > 0.01) { // too small v generates artifacts
           const s = v * 100
-          chanceToAmplify = (Math.random() / s) + (1-1/s);
+          chanceToAmplify = (Math.random() / s) + (1 - 1 / s);
           const output = 2 * (Math.random() - 0.5)
-          * Math.pow(chanceToAmplify, 100) // power of 1000 creates numbers up to infinity
-          * ((v / 2) + 0.5);
+            * Math.pow(chanceToAmplify, 100) // power of 1000 creates numbers up to infinity
+            * ((v / 2) + 0.5);
           // This loop can branch out based on AudioParam array length
           outputChannel[i] = output // scale amplitude/volume with speed
-        }else{
+        } else {
           outputChannel[i] = 0
         }
       }
