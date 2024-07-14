@@ -3,7 +3,6 @@ export class BallList extends Array {
     for (let i = 0; i < this.length; i++) {
       const b = this[i]
       if(this.#hit(b, pos)){
-        console.log("hit ball: ", b)
         return b
       }
     }

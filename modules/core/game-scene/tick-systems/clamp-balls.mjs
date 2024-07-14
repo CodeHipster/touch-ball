@@ -6,6 +6,7 @@ export class ClampBalls{
 
   onTick(){
     const balls = this.store.getBalls()
+    // TODO: set bounds only on resize.
     const bounds = this.canvas.getBounds()
     balls.forEach(ball => {
       this.#clamp_ball(ball, bounds)

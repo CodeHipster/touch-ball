@@ -9,7 +9,7 @@ export default class Starter {
     this.platform = platform
   }
 
-  start(htmlCanvas, audioContext) {
+  start(htmlCanvas) {
     const sceneManager = new SceneManager()
     sceneManager.addScene("init", new InitScene(this.platform, sceneManager))
     sceneManager.addScene("game", new BallScene(this.platform, htmlCanvas))

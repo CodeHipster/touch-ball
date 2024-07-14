@@ -1,4 +1,4 @@
-export class InitScenePaintSystem {
+export class Painter {
 
   triangleRatio = 1.1547005383792515
 
@@ -7,7 +7,7 @@ export class InitScenePaintSystem {
     this.context = htmlCanvas.getContext("2d")
   }
 
-  onTick() {
+  triangle() {
     // render play button
     const width = this.canvas.width
     const height = this.canvas.height
@@ -55,4 +55,5 @@ export class InitScenePaintSystem {
     this.context.strokeStyle = 'black';
     this.context.stroke();
   }
+
 }

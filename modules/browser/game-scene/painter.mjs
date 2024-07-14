@@ -1,14 +1,9 @@
 export class Painter {
-  context
-  backgroundContext
 
-  constructor(context, backgroundContext) {
-    this.context = context
-    this.backgroundContext = backgroundContext
-  }
-
-  wipe() {
-    this.context.clearRect(0, 0, canvas.width, canvas.height);
+  constructor(htmlCanvas, backgroundCanvas) {
+    this.context = htmlCanvas.getContext("2d")
+    this.backgroundCanvas = backgroundCanvas
+    this.backgroundContext = this.backgroundCanvas.getContext("2d")
   }
 
   paint(ball) {
@@ -19,9 +14,10 @@ export class Painter {
     this.context.stroke();
   }
 
+  // Spray on background
   spray(ball) {
     const sprayCount = 5 * ball.velocity
-
+    
     this.backgroundContext.fillStyle = `rgb(${ball.color[0]},${ball.color[1]},${ball.color[2]})`;
     for (let i = 0; i < sprayCount; i++) {
       const randomPos = (Math.random() * ball.radius) / 3 + ball.radius / 2
@@ -45,6 +41,11 @@ export class Painter {
     this.backgroundContext.beginPath();
     this.backgroundContext.arc(x, y, ball.radius / 3, 0, 2 * Math.PI);
     this.backgroundContext.fill();
+  }
+
+  // Paint the background on the canvas
+  background(){
+    this.context.drawImage(this.backgroundCanvas, 0, 0);
   }
 
   #rotate(x, angle) {

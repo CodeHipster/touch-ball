@@ -6,6 +6,7 @@ export class Background {
     this.htmlCanvas = htmlCanvas
     this.shadowCanvas = htmlCanvas.cloneNode()
 
+    console.log("boop")
     window.addEventListener("resize", () => this.#resize())
 
     this.#resize()
@@ -20,8 +21,11 @@ export class Background {
   }
 
   #resize() {
-    this.shadowCanvas.width = this.htmlCanvas.width
-    this.shadowCanvas.height = this.htmlCanvas.height
+    console.log("beep")
+    const width = window.innerWidth
+    const height = window.innerHeight
+    this.shadowCanvas.width = width
+    this.shadowCanvas.height = height
     const ctx = this.shadowCanvas.getContext("2d")
     ctx.fillStyle = `rgb(247,236,210)`
     ctx.fillRect(0, 0, this.shadowCanvas.width, this.shadowCanvas.height)

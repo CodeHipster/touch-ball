@@ -1,14 +1,10 @@
 export class PaintBackground {
 
-  bitmap = null
-
-  constructor(background, context) {
-    this.background = background
-    this.context = context
+  constructor(painter) {
+    this.painter = painter
   }
 
   onTick() {
-    const canvas = this.background.getCanvas()
-    this.context.drawImage(canvas, 0, 0);
+    this.painter.background()
   }
 }

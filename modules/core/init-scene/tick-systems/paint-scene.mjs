@@ -1,9 +1,9 @@
-export class WipeCanvas{
+export class InitScenePaintSystem{
+
   constructor(painter){
     this.painter = painter
   }
-
   onTick(){
-    this.painter.wipe()
+    this.painter.triangle()
   }
 }

@@ -1,4 +1,5 @@
 import { Looper } from "../common/looper.mjs"
+import { InitScenePaintSystem } from "./tick-systems/paint-scene.mjs"
 
 export class InitScene {
 
@@ -8,7 +9,8 @@ export class InitScene {
     this.canvas = platform.canvas()
     this.looper = new Looper(scheduler)
     const painter = platform.initScenePainter()
-    this.looper.addSystem(painter)
+    const paintSystem = new InitScenePaintSystem(painter)
+    this.looper.addSystem(paintSystem)
     this.sceneManager = sceneManager
   }
 
